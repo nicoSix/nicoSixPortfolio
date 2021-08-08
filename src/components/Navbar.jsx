@@ -58,6 +58,25 @@ export default function Navbar() {
   const [mobileView, setMobileView] = useState(window.innerWidth < 900);
   const [drawerOpen, setDrawerOpen] = useState(false);
 
+  const items = [
+    {
+      path: '/',
+      label: 'Home'
+    },
+    {
+      path: '/experience',
+      label: 'Past experiences'
+    },
+    {
+      path: '/publications',
+      label: 'Publications'
+    },
+    {
+      path: '/projects',
+      label: 'Projects'
+    }
+  ];
+
   const handleDrawer = () => {
     setDrawerOpen(!drawerOpen);
   };
@@ -100,18 +119,14 @@ export default function Navbar() {
           <Typography variant="overline" className={classes.titleDrawer}>
             Menu
           </Typography>
-          <Divider />
-          <Link className={classes.drawerItem} to="/experience">
-            Past experiences
-          </Link>
-          <Divider />
-          <Link className={classes.drawerItem} to="/publications">
-            Publications
-          </Link>
-          <Divider />
-          <Link className={classes.drawerItem} to="/projects">
-            Projects
-          </Link>
+          {items.map(item => (
+            <>
+              <Divider />
+              <Link className={classes.drawerItem} to={item.path} onClick={handleDrawer}>
+                {item.label}
+              </Link>
+            </>
+          ))}
           <Divider />
           <span className={classes.drawerItem} onClick={() => window.open('/files/cv.pdf')}>
             Download CV
@@ -134,15 +149,11 @@ export default function Navbar() {
             <b>Nicolas Six</b>
           </Typography>
         </Link>
-        <Link to="/experience" className={classes.navbarItem}>
-          Past experiences
-        </Link>
-        <Link to="/publications" className={classes.navbarItem}>
-          Publications
-        </Link>
-        <Link to="/projects" className={classes.navbarItem}>
-          Projects
-        </Link>
+        {items.map(item => (
+            <Link to={item.path} className={classes.navbarItem}>
+              {item.label}
+            </Link>
+        ))}
         <span className={classes.downloadCV} onClick={() => window.open('/files/cv.pdf')}>
           Download CV
         </span>
