@@ -1,25 +1,39 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
-  menuButton: {
-    marginRight: theme.spacing(2)
+  navbarItem: {
+    marginRight: theme.spacing(2),
+    color: 'white',
+    textDecoration: 'none',
+    '&:hover': {
+      textDecoration: 'underline white',
+    }
   },
   title: {
     flexGrow: 1,
     textAlign: 'left',
+    color: 'white',
+    textDecoration: 'none'
+  },
+  titleSize: {
     fontSize: '120%'
   },
   appBar: {
     backgroundColor: '#52307c',
     marginBottom: '20px'
+  },
+  downloadCV: {
+    '&:hover': {
+      cursor: 'pointer',
+      textDecoration: 'underline white',
+    }
   }
 }));
 
@@ -30,13 +44,23 @@ export default function Navbar() {
     <div className={classes.root}>
       <AppBar position="static" className={classes.appBar}>
         <Toolbar>
-          <Typography variant="overline" className={classes.title}>
-            <b>Nicolas Six</b>
-          </Typography>
-          <Button className={classes.menuButton} color="inherit">Past experiences</Button>
-          <Button className={classes.menuButton} color="inherit">Publications</Button>
-          <Button className={classes.menuButton} color="inherit">Projects</Button>
-          <Button className={classes.menuButton} color="inherit">CV</Button>
+          <Link to="/" className={classes.title}>
+            <Typography variant="overline" className={classes.titleSize}>
+              <b>Nicolas Six</b>
+            </Typography>
+          </Link>
+          <Link to="/experience" className={classes.navbarItem}>
+            Past experiences
+          </Link>
+          <Link to="/publications" className={classes.navbarItem}>
+            Publications
+          </Link>
+          <Link to="/projects" className={classes.navbarItem}>
+            Projects
+          </Link>
+          <span className={classes.downloadCV} onClick={() => window.open('/files/cv.pdf')}>
+            Download CV
+          </span>
         </Toolbar>
       </AppBar>
     </div>

@@ -15,7 +15,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-export default function Navbar() {
+export default function Home() {
   const classes = useStyles();
 
   return (
